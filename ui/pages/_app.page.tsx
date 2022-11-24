@@ -20,5 +20,21 @@ export default function App() {
     creatingTransaction: false,
   });
 
+  // -------------------------------------------------------
+  // Do Setup
+  useEffect(() => {
+    (async () => {
+      if (!state.hasBeenSetup) {
+        const zkappWorkerClient = new ZkappWorkerClient();
+        console.log("Loading SnarkyJS...");
+        await zkappWorkerClient.loadSnarkyJS();
+        console.log("done");
+        await zkappWorkerClient.setActiveInstanceToBerkeley();
+        // TODO
+      }
+    })();
+  }, []);
+  // -------------------------------------------------------
+
   return <div />;
 }
